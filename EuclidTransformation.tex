@@ -7,6 +7,7 @@
 \renewcommand \proofname{\bf 証明}
 \newcommand{\exprx}{e^{[\boldsymbol{r}]_{\times}}}
 \newcommand{\rx}{[\boldsymbol{r}]_{\times}}
+\newcommand{\brx}{[\bar{\boldsymbol{r}}]_{\times}}
 
 \begin{document}
 
@@ -38,6 +39,7 @@
 \item $SO(n):=\{A \in M(n,\mathbb{R}) | {}^tAA=E_n, \det(A)=1 \}$
 \item $U(n):=\{A \in M(n,\mathbb{C}) | A^*A=E_n\}$
 \item $R(\boldsymbol{r},\theta)$: 回転軸$\boldsymbol{r}$、回転量$\theta$の回転行列
+\item $(A_{ij})$: ij成分が$A_{ij}$の行列
 \end{itemize}
 
 
@@ -199,6 +201,7 @@ R_{\mathcal O1\rightarrow \mathcal O2} &=& R(yaw) R(pitch) R(roll)
 大きさ$||\boldsymbol{r}||=:\theta$が、回転量を表すベクトルとして定義する。
 以下では、この$\boldsymbol{r}$と回転行列の関係を調べる。
 
+\subsubsection{回転ベクトルからの回転行列の作成}
 まず、$\boldsymbol{r}$から回転行列を作る。
 \begin{Def}
     \begin{eqnarray}
@@ -236,13 +239,13 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
 
 \begin{proof}
     \begin{eqnarray}
-        e^{A+B}&=&\sum_{n=0}^{\infty} \frac{(A+B)^n}{n!}\\
-        &=&\sum_{n=0}^{\infty}\frac{1}{n!} \sum_{m=0}^n {}_nC_m A^m B^{n-m} \hspace{5mm}(\because AB=BA) \\
-        &=&\sum_{n=0}^{\infty}\sum_{m=0}^n \frac{A^m B^{n-m}}{m! (n-m)!} \\
+        e^{A+B}&=&\sum_{n=0}^{\infty} \frac{(A+B)^n}{n!}\nonumber\\
+        &=&\sum_{n=0}^{\infty}\frac{1}{n!} \sum_{m=0}^n {}_nC_m A^m B^{n-m} \hspace{5mm}(\because AB=BA) \nonumber\\
+        &=&\sum_{n=0}^{\infty}\sum_{m=0}^n \frac{A^m B^{n-m}}{m! (n-m)!} \nonumber\\
         &=&(E_3+\frac{B}{1!}+\frac{B^2}{2!}+\hdots)+\frac{A}{1!}(E_3+\frac{B}{1!}+\frac{B^2}{2!}+\hdots) \nonumber\\
-        &&+\frac{A^2}{2!}(E_3+\frac{B}{1!}+\frac{B^2}{2!}+\hdots)+\hdots \\
-        &=&(\sum_{n=0}^{\infty} \frac{A^n}{n!}) (\sum_{m=0}^{\infty} \frac{B^m}{m!}) \\
-        &=&e^A e^B = e^B e^A
+        &&+\frac{A^2}{2!}(E_3+\frac{B}{1!}+\frac{B^2}{2!}+\hdots)+\hdots \nonumber\\
+        &=&(\sum_{n=0}^{\infty} \frac{A^n}{n!}) (\sum_{m=0}^{\infty} \frac{B^m}{m!}) \nonumber\\
+        &=&e^A e^B = e^B e^A \nonumber
     \end{eqnarray}
 \end{proof}
 
@@ -263,9 +266,9 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
               0 & \lambda_2 & * \\
               0 & 0 & \lambda_3
           \end{array}
-        \right) \\
-        \det(e^A)&=&\det(P^{-1}e^AP) \\
-        &=&\det(e^{P^{-1}AP}) \\
+        \right) \nonumber\\
+        \det(e^A)&=&\det(P^{-1}e^AP) \nonumber\\
+        &=&\det(e^{P^{-1}AP}) \nonumber\\
         &=&\det(\sum_{n=0}^{\infty}\frac{1}{n!}
         \left(
           \begin{array}{ccc}
@@ -274,7 +277,7 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
               0 & 0 & \lambda_3^n
           \end{array}
         \right)
-        ) \\
+        ) \nonumber\\
         &=&\det
         \left(
           \begin{array}{ccc}
@@ -282,7 +285,7 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
               0 & \sum_{n=0}^{\infty}\frac{\lambda_2^n}{n!} & * \\
               0 & 0 & \sum_{n=0}^{\infty}\frac{\lambda_3^n}{n!}
           \end{array}
-        \right) \\
+        \right) \nonumber\\
         &=&\det
         \left(
           \begin{array}{ccc}
@@ -290,10 +293,10 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
               0 & e^{\lambda_2} & * \\
               0 & 0 & e^{\lambda_3}
           \end{array}
-        \right) \\
-        &=&e^{\lambda_1+\lambda_2+\lambda_3} \\
-        &=&e^{\mathrm{Tr}(P^{-1}AP)} \\
-        &=&e^{\mathrm{Tr}(A)}
+        \right) \nonumber\\
+        &=&e^{\lambda_1+\lambda_2+\lambda_3} \nonumber\\
+        &=&e^{\mathrm{Tr}(P^{-1}AP)} \nonumber\\
+        &=&e^{\mathrm{Tr}(A)} \nonumber
     \end{eqnarray}
 \end{proof}
 
@@ -311,8 +314,8 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
     となる。すると、求めたい$R(\boldsymbol{\bar{r}},\theta)$の固有値は、$R(\boldsymbol{z},\theta)$の固有値と同じであり、
     それを$\lambda$とおくと、
     \begin{eqnarray}
-        0&=&\det(R(\boldsymbol{z},\theta)-\lambda E_3)\\
-        &=& (1-\lambda)(\lambda^2-2\cos(\theta)\lambda+1)\\
+        0&=&\det(R(\boldsymbol{z},\theta)-\lambda E_3) \nonumber\\
+        &=& (1-\lambda)(\lambda^2-2\cos(\theta)\lambda+1) \nonumber\\
         \Rightarrow \lambda&=&1,e^{\pm i\theta}
     \end{eqnarray}
     
@@ -323,25 +326,25 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
     $e^{[\boldsymbol{r}]_{\times}}$が回転行列であることを示すには、
     $\det(e^{[\boldsymbol{r}]_{\times}})=1$、 $e^{[\boldsymbol{r}]_{\times}} {}^t(e^{[\boldsymbol{r}]_{\times}})=E_3$を示せばよい。
     \begin{eqnarray}
-        \det(e^{[\boldsymbol{r}]_{\times}}) &=& e^{\mathrm{Tr}([\boldsymbol{f}]_{\times})} \hspace{10mm}(\because 補題\ref{lem:detTr})\\
-        &=& e^0 = 1 \\
+        \det(e^{[\boldsymbol{r}]_{\times}}) &=& e^{\mathrm{Tr}([\boldsymbol{f}]_{\times})} \hspace{10mm}(\because 補題\ref{lem:detTr}) \nonumber\\
+        &=& e^0 = 1 \nonumber\\
         e^{[\boldsymbol{r}]_{\times}} {}^t(e^{[\boldsymbol{r}]_{\times}}) &=& \
-        e^{[\boldsymbol{r}]_{\times}+\ {}^t[\boldsymbol{r}]_{\times}} \hspace{10mm}(\because 補題\ref{lem:powerOfE})\\
-        &=& e^{[\boldsymbol{r}]_{\times}-[\boldsymbol{r}]_{\times}} = e^{O_3} = E_3
+        e^{[\boldsymbol{r}]_{\times}+\ {}^t[\boldsymbol{r}]_{\times}} \hspace{10mm}(\because 補題\ref{lem:powerOfE}) \nonumber\\
+        &=& e^{[\boldsymbol{r}]_{\times}-[\boldsymbol{r}]_{\times}} = e^{O_3} = E_3 \nonumber
     \end{eqnarray}
     回転軸が$\boldsymbol{r}$であることを示すには、$\boldsymbol{r}$が$e^{[\boldsymbol{r}]_{\times}}$の固有ベクトル
     になっていることを示せばよい。
     \begin{eqnarray}
-        e^{[\boldsymbol{r}]_{\times}} \boldsymbol{r} &=& (\sum_{n=0}^{\infty}\frac{[\boldsymbol{r}]_{\times}{}^n}{n!}) \boldsymbol{r} \\
-        &=& \frac{[\boldsymbol{r}]_{\times}{}^0}{0!} \boldsymbol{r} \hspace{10mm}(\because [\boldsymbol{r}]_{\times}\boldsymbol{r}=0)\\
-        &=& \boldsymbol{r}
+        e^{[\boldsymbol{r}]_{\times}} \boldsymbol{r} &=& (\sum_{n=0}^{\infty}\frac{[\boldsymbol{r}]_{\times}{}^n}{n!}) \boldsymbol{r} \nonumber\\
+        &=& \frac{[\boldsymbol{r}]_{\times}{}^0}{0!} \boldsymbol{r} \hspace{10mm}(\because [\boldsymbol{r}]_{\times}\boldsymbol{r}=0) \nonumber\\
+        &=& \boldsymbol{r} \nonumber
     \end{eqnarray}
     回転角度が$||\boldsymbol{r}||(=\theta)$であることを示すには、補題\ref{lem:eigR}より、$\exprx$の固有値が$1,e^{\pm i\theta}$
     であることを示せばよい。
     $\rx$の固有値を$\lambda_1,\lambda_2,\lambda_3$とすると、$\rx$を対角化する$U \in U(3)$があり、
     \begin{eqnarray}
-        U^{-1} \exprx U &=& U^{-1} \sum_n \frac{\rx{}^n}{n!} U \\
-        &=& e^{U^{-1} \rx U} \\
+        U^{-1} \exprx U &=& U^{-1} \sum_n \frac{\rx{}^n}{n!} U \nonumber\\
+        &=& e^{U^{-1} \rx U} \nonumber\\
         &=& \exp
         \left(
         \begin{array}{c c c}
@@ -349,7 +352,7 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
             0&\lambda_2&0\\
             0&0&\lambda_3
         \end{array}
-        \right) \\
+        \right) \nonumber\\
         &=& \sum_n \frac{1}{n!}
           \left(
             \begin{array}{c c c}
@@ -357,7 +360,7 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
                 0&\lambda_2&0\\
                 0&0&\lambda_3
             \end{array}
-          \right)^n \\
+          \right)^n \nonumber\\
         &=&          \left(
             \begin{array}{c c c}
                 e^{\lambda_1}&0&0\\
@@ -368,8 +371,8 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
     \end{eqnarray}
     一方、$\rx$の固有値$\lambda$は、
     \begin{eqnarray}
-        0 = \det(\rx-\lambda E_3) = -\lambda(\lambda^2+\theta^2) \\
-        \Rightarrow \lambda = 0,\pm i\theta
+        0 = \det(\rx-\lambda E_3) = -\lambda(\lambda^2+\theta^2) \nonumber\\
+        \Rightarrow \lambda = 0,\pm i\theta 
     \end{eqnarray}
     だから、$\exprx$の固有値は、$1,e^{\pm i\theta}$となる。
     以上により、命題\ref{thm:rotvec}が示された。
@@ -380,13 +383,13 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
 
 \begin{Prp}(Rodriguessの公式)
     \begin{eqnarray}
-        \exprx = E_3 + \sin\theta [\boldsymbol{\bar r}]_{\times} + (1-\cos \theta)[\boldsymbol{\bar r}]_{\times}^2
+        \exprx = E_3 + \sin\theta \brx + (1-\cos \theta)\brx^2
     \end{eqnarray}
 \end{Prp}
 
 \begin{proof}
     \begin{eqnarray}
-        \rx^3 = -\theta \rx \label{eq:rxqube}\\
+        \rx^3 = -\theta \rx \label{eq:rxqube} \\
         \cos \theta = \sum_{n=0}^\infty \frac{(-1)^n}{(2n)!}\theta^{2n}, \hspace{5mm}
         \sin \theta = \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!}\theta^{2n+1} \label{eq:cossin}
      \end{eqnarray}
@@ -394,23 +397,47 @@ $\boldsymbol{r}$に対応する回転行列になる、ということである�
     \begin{eqnarray}
         \exprx 
         &=& \sum_{n=0}^\infty \frac{\rx^n}{n!}
-        = \sum_{m=0}^{\infty} (\frac{\rx^{2m}}{(2m)!} + \frac{\rx^{2m+1}}{(2m+1)!}) \\
+        = \sum_{m=0}^{\infty} (\frac{\rx^{2m}}{(2m)!} + \frac{\rx^{2m+1}}{(2m+1)!}) \nonumber\\
         &=& E_3 + \sum_{m=1}^\infty \frac{(-\theta^2)^{m-1} \rx^2}{(2m)!} 
-        + \sum_{m=0}^\infty \frac{(-\theta^2)^m \rx}{(2m+1)!} \hspace{5mm} (\because (\ref{eq:rxqube}))\\
+        + \sum_{m=0}^\infty \frac{(-\theta^2)^m \rx}{(2m+1)!} \hspace{5mm} (\because (\ref{eq:rxqube})) \nonumber\\
         &=& E_3 + (-\theta^2)^{-1} \rx^2 (\sum_{m=0}^\infty \frac{(-1)^m\theta^{2m}}{(2m)!} - 1) \nonumber\\
-        && + \theta^{-1} \rx (\sum_{m=0}^\infty \frac{(-1)^m\theta^{2m+1}}{(2m+1)!} ) \\
+        && + \theta^{-1} \rx (\sum_{m=0}^\infty \frac{(-1)^m\theta^{2m+1}}{(2m+1)!} ) \nonumber\\
         &=& E_3 - \frac{\rx^2}{\theta^2}(\cos\theta - 1) + \frac{\rx}{\theta} \sin\theta 
-        \hspace{5mm}(\because(\ref{eq:cossin}))\\
+        \hspace{5mm}(\because(\ref{eq:cossin})) \nonumber\\
         &=& E_3 + \frac{\sin \theta}{\theta}\rx
-        + \frac{1-\cos \theta}{\theta^2}\rx^2\\
-        &=& E_3 + \sin\theta [\boldsymbol{\bar r}]_{\times} + (1-\cos \theta)[\boldsymbol{\bar r}]_{\times}^2
+        + \frac{1-\cos \theta}{\theta^2}\rx^2 \nonumber\\
+        &=& E_3 + \sin\theta \brx + (1-\cos \theta)\brx^2 \nonumber
     \end{eqnarray}
 \end{proof}
 
 この公式から、$e^{[\boldsymbol{r}]_{\times }} \boldsymbol{r} = \boldsymbol{r}$がすぐに確かめられるので、ここでも、
 $\boldsymbol{r}$が回転軸方向であることが確かめられる。
 
+ここで、Rodriguessの公式を、行列成分でも書いておくと、
+\begin{equation}
+	\brx^2 = \left(
+			\begin{array}{ccc}
+				-\bar{r}_2^2-\bar{r}_3^2 & \bar{r}_1\bar{r}_2 & \bar{r}_1\bar{r}_3 \\ 
+				\bar{r}_2\bar{r}_1 & -\bar{r}_3^2-\bar{r}_1^2 & \bar{r}_2\bar{r}_3 \\ 
+				\bar{r}_3\bar{r}_1 & \bar{r}_3\bar{r}_2 & -\bar{r}_1^2-\bar{r}_2^2 
+			\end{array}	
+		\right)
+		= (\bar{r}_i \bar{r}_j) - E_3 
+\end{equation}
+だから、
+\begin{eqnarray}
+	R &=& E_3 + \sin\theta \brx + (1-\cos \theta)((\bar{r}_i \bar{r}_j) - E_3) \nonumber\\
+	&=& \cos\theta E_3 + \sin\theta \brx + (1-\cos\theta)(\bar{r}_i \bar{r}_j) \nonumber\\
+	&=&	 \left(
+	\begin{array}{ccc}
+	\cos\theta + \bar{r}_1^2(1-\cos\theta) & -\bar{r}_3\sin\theta + \bar{r}_1\bar{r}_2(1-\cos\theta) & \bar{r}_2\sin\theta + \bar{r}_1\bar{r}_3(1-\cos\theta)\\
+	\bar{r}_3\sin\theta + \bar{r}_2\bar{r}_1(1-\cos\theta) & \cos\theta + \bar{r}_2^2(1-\cos\theta) & -\bar{r}_1\sin\theta + \bar{r}_2\bar{r}_3(1-\cos\theta)\\
+	-\bar{r}_2\sin\theta + \bar{r}_3\bar{r}_1(1-\cos\theta) & \bar{r}_1\sin\theta + \bar{r}_3\bar{r}_2(1-\cos\theta) & \cos\theta + \bar{r}_3^2(1-\cos\theta)
+	\end{array}
+	\right) \nonumber\\
+\end{eqnarray}
 
+\subsubsection{回転行列からの回転ベクトルの作成}
 次に、回転行列$R$から回転ベクトル$\boldsymbol{r}$を作ることを考える。
 \begin{Prp}
     回転行列$R$に対し、そのi,j成分を$r_{ij}$とするとき、対応する回転ベクトル$\boldsymbol{r}$の
